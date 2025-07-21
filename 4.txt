@@ -1,0 +1,242 @@
+props destructuring: Card.jsx
+function Card({name,city}){
+    return (
+        <div>
+            <h2> welcome :{name}</h2>
+            <p>City:{city}</p>
+        </div>
+    )
+}
+export default Card;
+============================
+Card.jsx
+function Card(props){
+    return (
+        <div>
+           <h2> Card component</h2>
+           <button onClick={props.onClick}>{props.label}</button>
+        </div>
+    )
+}
+export default Card;
+App.jsx
+import First from "./First";
+import Second from "./second";
+import Third from "./third"; 
+import Fourth from "./Fourth"
+import Card from "./Card";
+function App() {
+  function handleClick(){
+    alert("function from parent component")
+  }
+  return (
+    <div>
+      <h1>React app with vite tool</h1>
+     <Card label="Click me" onClick={handleClick}/>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+============================
+
+function Store(){
+    let data=10;
+    function updateData(){
+        data=20
+        alert(`data: ${data}`)
+    }
+    return(
+        <div>
+            <h2>Store component:</h2>
+            <h3> Data:{data}</h3>
+            <button onClick={updateData}>Update Data</button>
+        </div>
+    )
+}
+export default Store; import First from "./First";
+import Second from "./second";
+import Third from "./third"; 
+import Fourth from "./Fourth"
+import Card from "./Card";
+import Store from "./Store";
+function App() {
+  function handleClick(){
+    alert("function from parent component")
+  }
+  return (
+    <div>
+     <Store/>
+    </div>
+  );
+}
+
+export default App;
+//error varible cant track the updatio so,
+we use usestate:
+
+app.jsx same
+
+Store.jsx
+import {useState} from "react"
+function Store(){
+   // let data=10;
+const [data,setData]=useState(10);
+
+    function updateData(){
+        setData(20);
+        alert(`data: ${data}`)
+    }
+    console.log("........................")
+    return(
+        <div>
+            <h2>Store component:</h2>
+            <h3> Data:{data}</h3>
+            <button onClick={updateData}>Update Data</button>
+        </div>
+    )
+}
+export default Store;
+
+============================
+// import {useState} from "react";
+// function Counter(){
+
+//     const[count,setCount]=useState(0)
+//     function Update(){
+//         setCount(count+1)
+//     }
+//     return(
+//         <div>
+//             <h2>counter:{count}</h2>
+//             <button onClick={Update}>Increment</button>
+//         </div>
+//     )
+// }
+// export default Counter;
+//(or)
+//using arrow function by removing update  functn
+
+import {useState} from "react";
+function Counter(){
+
+    const[count,setCount]=useState(10)
+   
+    return(
+        <div>
+            <h2>counter:{count}</h2>
+            <button onClick={()=>setCount(count+1)}>Increment</button>
+        </div>
+    )
+}
+export default Counter;
+
+app.jsx
+import First from "./First";
+import Second from "./second";
+import Third from "./third"; 
+import Fourth from "./Fourth"
+import Card from "./Card";
+import Store from "./Store";
+import Counter from "./Counter";
+function App() {
+  function handleClick(){
+    alert("function from parent component")
+  }
+  return (
+    <div>
+    <Counter/>
+    </div>
+  );
+}
+
+export default App;
+===========
+import First from "./First";
+import Second from "./second";
+import Third from "./third"; 
+import Fourth from "./Fourth"
+import Card from "./Card";
+import Store from "./Store";
+import Counter from "./Counter";
+import NewComp from "./NewComp";
+function App() {
+  function handleClick(){
+    alert("function from parent component")
+  }
+  return (
+    <div>
+    <NewComp/>
+    </div>
+  );
+}
+
+export default App;
+
+
+import {useState} from "react"
+function NewComp(){
+    const [show,setShow]=useState(true);
+   return(
+   <div>
+            
+            
+            <button onClick={()=>setShow(!show)}>
+ {show ?"Hide Text":"show text"}
+            </button>
+           
+          {show && <p>This is my secret message</p>}
+        </div>
+   )
+}
+export default NewComp;
+
+================
+import {useState} from "react"
+
+
+function FirstComponent() {
+  return <p>This is the first component</p>;
+}
+
+function SecondComponent() {
+  return <p>This is the second component</p>;
+}
+function NewComp(){
+    const [first,setFirst]=useState(true);
+   return(
+   <div>
+            
+            
+           <button onClick={() => setFirst(!first)}>
+        {first ? "Show Second Component" : "Show First Component"}
+      </button>
+
+     
+      {first ? <FirstComponent /> : <SecondComponent />}
+        </div>
+   )
+}
+export default NewComp;
+===================
+
+import {useState} from "react";
+function Counter_prop_state(){
+
+    const[count,setCount]=useState(10)
+   
+    return(
+        <div>
+            <h2>counter:{count}</h2>
+            <button onClick={()=>setCount(count+1)}>Increment</button>
+            <button onClick={()=>setCount(count-1)}>Decrement</button>
+            <button onClick={()=>setCount(0)}>Reset</button>
+
+        </div>
+    )
+}
+export default Counter_prop_state
+;
